@@ -3,7 +3,7 @@ import { combineReducers } from "redux";
 import todos from "../modules/todos.js";
 
 const rootReducer = combineReducers({
-  factory,
+  todos,
 });
 const store = createStore(rootReducer);
 

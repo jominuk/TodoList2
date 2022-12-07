@@ -1,38 +1,58 @@
 import React from "react";
 import styled from "styled-components";
+import { useSelector } from "react-redux";
 
 const List = () => {
+  const todos = useSelector((state) => state.todos.todos);
+  console.log(todos);
+
   return (
     <StListContainer>
       <h2>Working.. 🔥</h2>
       <StListWrapper>
-        <StTodoContainer>
-          <div>상세보기</div>
-
-          <div>
-            <h2> 제목 </h2>
-            <div> 내용 </div>
-          </div>
-          <StDialogFooter>
-            <StButton>삭제하기</StButton>
-            <StButton>완료</StButton>
-          </StDialogFooter>
-        </StTodoContainer>
+        {todos.map((todo, index) => {
+          if (todo.isDone === false) {
+            return (
+              <StTodoContainer key={`main-card-${todo.id}`}>
+                <div>상세보기</div>
+                <div>
+                  <h2> {todo.title} </h2>
+                  <div> {todo.contens} </div>
+                </div>
+                <StDialogFooter>
+                  <StButton>삭제하기</StButton>
+                  <StButton>완료</StButton>
+                </StDialogFooter>
+              </StTodoContainer>
+            );
+          } else {
+            return null;
+          }
+        })}
       </StListWrapper>
-      <h2 className="list-title">Done..! 🎉</h2>
-      <StListWrapper>
-        <StTodoContainer>
-          <div>상세보기</div>
 
-          <div>
-            <h2> 제목 </h2>
-            <div> 내용 </div>
-          </div>
-          <StDialogFooter>
-            <StButton>삭제하기</StButton>
-            <StButton>취소</StButton>
-          </StDialogFooter>
-        </StTodoContainer>
+      <h2 className="list-title">Done..! 🎉</h2>
+
+      <StListWrapper>
+        {todos.map((todo, index) => {
+          if (todo.isDone === true) {
+            return (
+              <StTodoContainer key={`main-card-${todo.id}`}>
+                <div>상세보기</div>
+                <div>
+                  <h2> {todo.title} </h2>
+                  <div> {todo.contens} </div>
+                </div>
+                <StDialogFooter>
+                  <StButton>삭제하기</StButton>
+                  <StButton>완료</StButton>
+                </StDialogFooter>
+              </StTodoContainer>
+            );
+          } else {
+            return null;
+          }
+        })}
       </StListWrapper>
     </StListContainer>
   );
