@@ -1,9 +1,9 @@
 import React from "react";
-import Home from "./pages/Home";
-// import Router from "./shared/Router";
+
+import Router from "./shared/Router";
 
 const App = () => {
-  return <Home />;
+  return <Router />;
 };
 
 export default App;

@@ -37,20 +37,20 @@ const todoReducer = (state = initialState, action) => {
     //행동을 코드로 나타내면 객체로 만든다. 이것을 action객체를 말하고 반드시 type이라는 키를 줘야한다.
     case ADD_TODO: //우리가 action객체를 reducer에게 보냈을 때 reducer는 객체 안에서 type라는 키를 확인하기 때문
       return {
-        ...state,
+        // ...state,
         todos: [...state.todos, action.payload],
       };
 
     case DELETE_TODO:
       return {
-        ...state,
+        // ...state,
         todos: state.todos.filter((todo) => todo.id !== action.payload), //주어진 함수를 모아 새로운 배열로 반환
         // 기존의 배열에서 todo.id가 일치 하지 않는 원소만 추출해서 새로운 배열을 만듬.
       };
 
     case TOGGLE_STATUS_TODO:
       return {
-        ...state,
+        // ...state,
         todos: state.todos.map((todo) => {
           if (todo.id === action.payload) {
             return {

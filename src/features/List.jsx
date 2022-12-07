@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import { deletTodo, toggleStatusTodo } from "../redux/modules/todos";
+import { useNavigate } from "react-router-dom";
 
 const List = () => {
   const todos = useSelector((state) => state.todos.todos);
@@ -15,6 +16,8 @@ const List = () => {
     dispatch(toggleStatusTodo(id));
   };
 
+  const navigate = useNavigate();
+
   return (
     <StListContainer>
       <h2>Working.. 🔥</h2>
@@ -23,7 +26,13 @@ const List = () => {
           if (todo.isDone === false) {
             return (
               <StTodoContainer key={`main-card-${todo.id}`}>
-                <div>상세보기</div>
+                <button
+                  onClick={() => {
+                    navigate("/Detail");
+                  }}
+                >
+                  상세보기
+                </button>
                 <div>
                   <h2> {todo.title} </h2>
                   <div> {todo.contens} </div>
