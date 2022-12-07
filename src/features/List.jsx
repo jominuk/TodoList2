@@ -1,10 +1,12 @@
 import React from "react";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
-import { deletTodo, toggleStatusTodo } from "../redux/modules/todos";
+import {
+  detailTodo,
+  deletTodo,
+  toggleStatusTodo,
+} from "../redux/modules/todos";
 import { Link } from "react-router-dom";
-// import { useNavigate } from "react-router-dom";
-// import { useParams } from "react-router-dom";
 
 const List = () => {
   const todos = useSelector((state) => state.todos.todos);
@@ -17,11 +19,6 @@ const List = () => {
   const onToggleStatusTodo = (id) => {
     dispatch(toggleStatusTodo(id));
   };
-
-  // const params = useParams();
-
-  // const navigate = useNavigate();
-
   return (
     <StListContainer>
       <h2>Working.. 🔥</h2>
@@ -30,18 +27,16 @@ const List = () => {
           if (todo.isDone === false) {
             return (
               <StTodoContainer key={`main-card-${todo.id}`}>
-                <StLink to="/Detail">
-                  <div> 상세보기 </div>
+                {/*라우터랑 동일이 되게 만든다 */}
+                <StLink to={`/detail/${todo.id}`}>
+                  <button
+                    onClick={() => {
+                      dispatch(detailTodo(todo.id)); //디스패치를 통해서 detailtodo의 id를 reducer한테 보내주는 작업 누락.
+                    }}
+                  >
+                    상세보기
+                  </button>
                 </StLink>
-
-                {/* <button
-                  onClick={() => {
-                    navigate("/Detail");
-                  }}
-                >
-                  상세보기
-                </button> */}
-
                 <div>
                   <h2> {todo.title} </h2>
                   <div> {todo.contens} </div>
@@ -69,7 +64,9 @@ const List = () => {
           if (todo.isDone === true) {
             return (
               <StTodoContainer key={`main-card-${todo.id}`}>
-                <div>상세보기</div>
+                <StLink to={`/detail/${todo.id}`}>
+                  <div> 상세보기 </div>
+                </StLink>
                 <div>
                   <h2> {todo.title} </h2>
                   <div> {todo.contens} </div>

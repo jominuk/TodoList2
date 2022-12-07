@@ -33,11 +33,12 @@ export const detailTodo = (payload) => {
 const initialState = {
   //타입이 배열이다.
   todos: [],
+  detail: {},
 };
 
 //Reducer 변화를 일으키는 함수
 const todoReducer = (state = initialState, action) => {
-  console.log(action.payload);
+  // console.log(action.payload);
   //state는 이니셜 스테이트가 그리고 액션을 넘겨준다
   switch (
     action.type //리덕스에서는 명령을 만드는 것을 action이라 하는데 리듀서에게 어떤 action을 하기 원한다라고 표현
@@ -45,20 +46,20 @@ const todoReducer = (state = initialState, action) => {
     //행동을 코드로 나타내면 객체로 만든다. 이것을 action객체를 말하고 반드시 type이라는 키를 줘야한다.
     case ADD_TODO: //우리가 action객체를 reducer에게 보냈을 때 reducer는 객체 안에서 type라는 키를 확인하기 때문
       return {
-        // ...state,
+        ...state,
         todos: [...state.todos, action.payload],
       };
 
     case DELETE_TODO:
       return {
-        // ...state,
+        ...state,
         todos: state.todos.filter((todo) => todo.id !== action.payload), //주어진 함수를 모아 새로운 배열로 반환
         // 기존의 배열에서 todo.id가 일치 하지 않는 원소만 추출해서 새로운 배열을 만듬.
       };
 
     case TOGGLE_STATUS_TODO:
       return {
-        // ...state,
+        ...state,
         todos: state.todos.map((todo) => {
           if (todo.id === action.payload) {
             return {
@@ -70,12 +71,18 @@ const todoReducer = (state = initialState, action) => {
           }
         }),
       };
-
+    // 나는 리듀서에서 디테일 투두 액션 타입에서 처리할래.
+    // 컴포넌트에 어떻게 반환해줄까.
+    // 민욱 : 여기서 작업한 id가 같은 애를 보내주자.
+    // 근데 status의 todos에다가 넣어주니까 todos가 바뀌는 현상(즉, 상세보기를 제외한 나머지가 다 필터과정에서 사라짐.)
+    // id를 보내주는 dispatch 이벤트가 없었어요.
+    // => Link에 버튼을 통해서 이벤트로 id값을 보내준겁니다.
     case DETAIL_TODO:
       return {
-        todos: state.todos.find((todo) => todo.id === action.payload),
+        ...state,
+        detail: { ...state.todos.find((todo) => todo.id === action.payload) },
       };
-
+    // todos를 건드리면 뒤로가기를 했을때 todos가 변해있겠죠? 그럼 기존에 있던 투두스들은 다 지워져요. 이 상세페이지 선택하고 나서
     default:
       return state;
   }
