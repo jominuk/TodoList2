@@ -1,10 +1,15 @@
 import React from "react";
 import styled from "styled-components";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { deletTodo } from "../redux/modules/todos";
 
 const List = () => {
   const todos = useSelector((state) => state.todos.todos);
-  console.log(todos);
+  const dispatch = useDispatch();
+
+  const TodoListDelete = (id) => {
+    dispatch(deletTodo(id));
+  };
 
   return (
     <StListContainer>
@@ -20,7 +25,9 @@ const List = () => {
                   <div> {todo.contens} </div>
                 </div>
                 <StDialogFooter>
-                  <StButton>삭제하기</StButton>
+                  <StButton onClick={() => TodoListDelete(todo.id)}>
+                    삭제하기
+                  </StButton>
                   <StButton>완료</StButton>
                 </StDialogFooter>
               </StTodoContainer>
@@ -44,7 +51,9 @@ const List = () => {
                   <div> {todo.contens} </div>
                 </div>
                 <StDialogFooter>
-                  <StButton>삭제하기</StButton>
+                  <StButton onClick={() => TodoListDelete(todo.id)}>
+                    삭제하기
+                  </StButton>
                   <StButton>완료</StButton>
                 </StDialogFooter>
               </StTodoContainer>

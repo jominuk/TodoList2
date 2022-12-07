@@ -2,18 +2,22 @@
 
 // Action Value
 const ADD_TODO = "ADD_TODO"; //대문자로 입력
+const DELETE_TODO = "DELETE_TODO";
 
 // Action Creator
-// Todo를 추가하는 action creator
+// Todo를 추가하는
 export const addSubmit = (payload) => {
   //매게변수 자리에 payload를 넣어준다.
   return { type: ADD_TODO, payload };
   //type라는 형식을 꼭 넣어줘야한다.
 };
-
+// Todo를 삭제하는
+export const deletTodo = (payload) => {
+  return { type: DELETE_TODO, payload };
+};
 // Initial State  초기 상태값이라 쓸일이 없어 그냥 initial로 이름 지정, useState와 동일한 역할을 한다.
 const initialState = {
-  //타입이 객체다
+  //타입이 배열이다.
   todos: [],
 };
 
@@ -28,6 +32,13 @@ const todoReducer = (state = initialState, action) => {
       return {
         ...state,
         todos: [...state.todos, action.payload],
+      };
+
+    case DELETE_TODO:
+      return {
+        ...state,
+        todos: state.todos.filter((todo) => todo.id !== action.payload), //주어진 함수를 모아 새로운 배열로 반환
+        // 기존의 배열에서 todo.id가 일치 하지 않는 원소만 추출해서 새로운 배열을 만듬.
       };
     default:
       return state;
