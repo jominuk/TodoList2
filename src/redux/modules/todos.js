@@ -4,6 +4,7 @@
 const ADD_TODO = "ADD_TODO"; //대문자로 입력
 const DELETE_TODO = "DELETE_TODO";
 const TOGGLE_STATUS_TODO = "TOGGLE_STATUS_TODO ";
+const DETAIL_TODO = "DETAIL_TODO";
 
 // Action Creator
 // Todo를 추가하는
@@ -12,13 +13,20 @@ export const addSubmit = (payload) => {
   return { type: ADD_TODO, payload };
   //type라는 형식을 꼭 넣어줘야한다.
 };
+
 // Todo를 삭제하는
 export const deletTodo = (payload) => {
   return { type: DELETE_TODO, payload };
 };
+
 // Todo를 옮기는
 export const toggleStatusTodo = (payload) => {
   return { type: TOGGLE_STATUS_TODO, payload };
+};
+
+//상세 페이지
+export const detailTodo = (payload) => {
+  return { type: DETAIL_TODO, payload };
 };
 
 // Initial State  초기 상태값이라 쓸일이 없어 그냥 initial로 이름 지정, useState와 동일한 역할을 한다.
@@ -61,6 +69,11 @@ const todoReducer = (state = initialState, action) => {
             return todo;
           }
         }),
+      };
+
+    case DETAIL_TODO:
+      return {
+        todos: state.todos.find((todo) => todo.id === action.payload),
       };
 
     default:

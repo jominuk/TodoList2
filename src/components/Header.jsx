@@ -4,8 +4,8 @@ import styled from "styled-components";
 const Header = () => {
   return (
     <StContainer>
-      <div>My Todo List</div>
-      <div>React</div>
+      <h1>My Todo List</h1>
+      <h3> 재미있는 React </h3>
     </StContainer>
   );
 };

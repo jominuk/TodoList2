@@ -2,7 +2,9 @@ import React from "react";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import { deletTodo, toggleStatusTodo } from "../redux/modules/todos";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
+// import { useParams } from "react-router-dom";
 
 const List = () => {
   const todos = useSelector((state) => state.todos.todos);
@@ -16,7 +18,9 @@ const List = () => {
     dispatch(toggleStatusTodo(id));
   };
 
-  const navigate = useNavigate();
+  // const params = useParams();
+
+  // const navigate = useNavigate();
 
   return (
     <StListContainer>
@@ -26,13 +30,18 @@ const List = () => {
           if (todo.isDone === false) {
             return (
               <StTodoContainer key={`main-card-${todo.id}`}>
-                <button
+                <StLink to="/Detail">
+                  <div> 상세보기 </div>
+                </StLink>
+
+                {/* <button
                   onClick={() => {
                     navigate("/Detail");
                   }}
                 >
                   상세보기
-                </button>
+                </button> */}
+
                 <div>
                   <h2> {todo.title} </h2>
                   <div> {todo.contens} </div>
@@ -104,9 +113,9 @@ const StTodoContainer = styled.div`
   padding: 12px 24px 24px 24px;
 `;
 
-// const StLink = styled(Link)`
-//   text-decoration: none;
-// `;
+const StLink = styled(Link)`
+  text-decoration: none;
+`;
 
 const StDialogFooter = styled.footer`
   display: flex;

@@ -1,19 +1,21 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-
+import { useSelector } from "react-redux";
 import styled from "styled-components";
+import { useParams } from "react-router-dom";
 
 const Detail = () => {
   const navigate = useNavigate();
-
+  const todos = useSelector((state) => state.todos.todos);
+  const params = useParams();
+  console.log(params);
   return (
     <StContainer>
       <StDialog>
         <div>
           <StDialogHeader>
-            <div>ID </div>
+            <div>ID : {todos.id} </div>
             <StButton
-              borderColor="#ddd"
               onClick={() => {
                 navigate("/");
               }}
@@ -21,8 +23,8 @@ const Detail = () => {
               이전으로
             </StButton>
           </StDialogHeader>
-          <StTitle> 제목 </StTitle>
-          <StBody> 내용? </StBody>
+          <StTitle> {todos.title} 123</StTitle>
+          <StBody> {todos.contens} 123 </StBody>
         </div>
       </StDialog>
     </StContainer>

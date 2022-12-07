@@ -3,6 +3,7 @@ import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Detail from "../pages/Detail";
 import Home from "../pages/Home";
+import Header from "../components/Header";
 
 // 2. Router 라는 함수를 만들고 아래와 같이 작성합니다.
 //BrowserRouter를 Router로 감싸는 이유는,
@@ -10,6 +11,7 @@ import Home from "../pages/Home";
 const Router = () => {
   return (
     <BrowserRouter>
+      <Header />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/:id" element={<Detail />} />
