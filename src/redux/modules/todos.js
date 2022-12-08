@@ -35,6 +35,7 @@ const initialState = {
   todos: [],
   detail: {},
 };
+//커밋
 
 //Reducer 변화를 일으키는 함수
 const todoReducer = (state = initialState, action) => {
